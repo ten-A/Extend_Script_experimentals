@@ -1,4 +1,4 @@
-﻿//QR Code Maker R2 Ver.0.5.0
+//QR Code Maker R2 Ver.0.5.0
 //first release date 2.Oct.2008
 //ver.0.1 release date 10.Oct.2009
 //last update :3.Aug.2011
@@ -158,7 +158,7 @@ pstng = [
 	[  6,  28,  50],						  // 10
 	[  6,  30,  54],						  // 11
 	[  6,  32,  58],						  // 12
-	[  6,  34,  62],						　// 13
+	[  6,  34,  62],						  // 13
 	[  6,  26,  46,  66],					// 14
 	[  6,  26,  48,  70],					// 15
 	[  6,  26,  50,  74],					// 16
@@ -166,13 +166,13 @@ pstng = [
 	[  6,  30,  56,  82],					// 18
 	[  6,  30,  58,  86],					// 19
 	[  6,  34,  62,  90],					// 20
-	[  6,  28,  50,  72,  94],			　// 21
-	[  6,  26,  50,  74,  98],			　 // 22
-	[  6,  30,  54,  78, 102],			　// 23
-	[  6,  28,  54,  80, 106],			　// 24
-	[  6,  32,  58,  84, 110],			　// 25
-	[  6,  30,  58,  86, 114],			　// 26
-	[  6,  34,  62,  90, 118],			　// 27
+	[  6,  28,  50,  72,  94],			// 21
+	[  6,  26,  50,  74,  98],			// 22
+	[  6,  30,  54,  78, 102],			// 23
+	[  6,  28,  54,  80, 106],			// 24
+	[  6,  32,  58,  84, 110],			// 25
+	[  6,  30,  58,  86, 114],			// 26
+	[  6,  34,  62,  90, 118],			// 27
 	[  6,  26,  50,  74,  98, 122],		 // 28
 	[  6,  30,  54,  78, 102, 126],		// 29
 	[  6,  26,  52,  78, 104, 130],		// 30
@@ -190,8 +190,8 @@ pstng = [
 
 // pre calculated info （ECC Level 2bit + mask 3bit + BCH code 10bit）
 frmInf = [
-	[0x77c4, 0x72f3, 0x7daa, 0x789d, 0x662f, 0x6318, 0x6c41, 0x6976],  //L
-	[0x5412, 0x5125, 0x5e7c, 0x5b4b, 0x45f9, 0x40ce, 0x4f97, 0x4aa0],  //M
+	[0x77c4, 0x72f3, 0x7daa, 0x789d, 0x662f, 0x6318, 0x6c41, 0x6976], //L
+	[0x5412, 0x5125, 0x5e7c, 0x5b4b, 0x45f9, 0x40ce, 0x4f97, 0x4aa0], //M
 	[0x355f, 0x3068, 0x3f31, 0x3a06, 0x24b4, 0x2183, 0x2eda, 0x2bed], //Q
 	[0x1689, 0x13be, 0x1ce7, 0x19d0, 0x0762, 0x0255, 0x0d0c, 0x083b] //H
   ];
@@ -204,9 +204,9 @@ vrInf = [0x07c94, 0x085bc, 0x09a99, 0x0a4d3, 0x0bbf6, 0x0c762, 0x0d847, 0x0e60d,
 	 0x24b0b, 0x2542e, 0x26a64, 0x27541, 0x28c69];
 
 //g(2^8) galois field, make up vector to scalar table
-exToN = new Array();  //alpha coefficients -> characteristic
+exToN = new Array(); //alpha coefficients -> characteristic
 exToN.length = 255;
-nToEx = new Array();  // characteristic -> alpha coefficients
+nToEx = new Array(); // characteristic -> alpha coefficients
 nToEx.length = 256;
 n = 0x01;
 for(i=0;i<255;i++) {
@@ -231,7 +231,7 @@ for(i=0;i<mxMd;i++) {
 	}
 
 
-//---Process------------------------------------------------------------------------------------------------
+//---Process---------------------------------------------------------------------------
 
 //window dialog---------------------------------------------------------------------
 var wString = "";
@@ -673,7 +673,7 @@ function creQR(wString){
 	var mask;
 	var minPenalty = 0x7fffffff;
 	var m;
-  
+
 	for (m=0x0;m<=0x7;m++) {
 		masking(mdlsNum, m);
 	var penalty = 0;
@@ -877,7 +877,7 @@ function get_cdWrds(version, level) {
 		if (n>2) {
 			 numMdls = numMdls + 2 * (n - 2) * 5;
 			}
-  　	}
+		}
 	if (version>=7) {
 		numMdls = numMdls - 2 * 18;
 		}
