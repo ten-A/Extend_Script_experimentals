@@ -1,8 +1,18 @@
-﻿//   JAN code maker 2.0.1
-//	  This Script work with Adobe Illustrator CS3, to make JAN CODE or EAN CODE on new AI documents.	
-//	  Creater : ten
-//	  Last update : 27.April.2009 (first rerease/Sep.04.2007)
-//        Release 2 : 18.Aug.2011.
+//   JAN code maker 2.0.2
+//	  This Script work with Adobe Illustrator CS3,. Generate EAN CODE on new AI document.
+//	  Creator : ten
+//	  Last update : 27.April.2009 (first release/Sep.04.2007)
+//        Release 2 : 19.Aug.2011.
+
+//set to attribute parameters
+var xpos = 15;
+var ypos = 20;
+var ptc = 0.93537474;
+var yhgt = 64.8;
+var currentLevel = 0;
+var gain = 0;   //set value, if you want choke lines.
+var lnColor = new GrayColor;
+lnColor.gray = 100;
 
 var numString = "";
 var dlg = new Window ('dialog', 'JAN(EAN)コード入力', [100,100,480,400]);
@@ -16,39 +26,35 @@ var dlg = new Window ('dialog', 'JAN(EAN)コード入力', [100,100,480,400]);
 
 function creBar(){
 	numString = dlg.msgPnl.msgEt.text
-	var st = Array (12);
-	var degit = Array (12);
-	var bar = Array (7);
-	var fChr = Array (10); 
-	fChr = [0x3f,0x34,0x32,0x31,0x2c,0x26,0x23,0x2a,0x29,0x25];
-	
+	dlg.close();
+	var st = Array ();
+	var digit = Array ();
+	var bar = Array ();
+	var fChr = [0x3f,0x34,0x32,0x31,0x2c,0x26,0x23,0x2a,0x29,0x25];
+
 	//1st character selection revese bit data. 7bit data in use, mask first bit.
 	//left even code.
-	var leSym = Array ();
-	leSym = [0xa7,0xb3,0x9b,0xa1,0x9d,0xb9,0x85,0x91,0x89,0x97];
+	var leSym = [0xa7,0xb3,0x9b,0xa1,0x9d,0xb9,0x85,0x91,0x89,0x97];
 	//left odd code.
-	var loSym = Array ();
-	loSym = [0x8d,0x99,0x93,0xbd,0xa3,0xb1,0xaf,0xbb,0xb7,0x8b];
-
+	var loSym = [0x8d,0x99,0x93,0xbd,0xa3,0xb1,0xaf,0xbb,0xb7,0x8b];
 	//right even code
-	var roSym = Array ();
-	roSym = [0x72,0x66,0x6c,0x42,0x5c,0x4e,0x50,0x44,0x48,0x74];
+	var roSym = [0x72,0x66,0x6c,0x42,0x5c,0x4e,0x50,0x44,0x48,0x74];
 
 	//input check 
 	for (i=0; i<=12; i++ ){
 		st[i] = Number (numString.substr (i, 1));
 		}
 	md10num = st[0]+st[1]*3+st[2]+st[3]*3+st[4]+st[5]*3+st[6]+st[7]*3+st[8]+st[9]*3+st[10]+st[11]*3;
-	mdDv = Math.floor (md10num/10);
-	mdOd = md10num-mdDv*10;
+	mdDv = Math.floor (md10num / 10);
+	mdOd = md10num - mdDv * 10;
 	if (mdOd == 0){
 		mdMod=0;
 		} else {
-			mdMod = 10-mdOd;
+			mdMod = 10 - mdOd;
 			}
-	
+
 	if (mdMod != st[12]){
-		alert("入力データに誤りがあります");
+		alert("Incorrect input data.");
 		dlg.close();
 		return;
 		}
@@ -58,28 +64,19 @@ function creBar(){
 	myLayer = myDoc.layers[0];
 	myLayer.name = "layer1";
 		
-	//set to attribute parameters
-	xpos = 15;
-	ypos = 20;
-	ptc = 0.93537474;
-	yhgt = 64.8;
-	currentPos = 0;
-	currentLevel = 0;
-	gain = 0;
-
 	//parity pattern check and get left side bit data
 	var wit = fChr[st[0]].toString(2);
 	for (i=1;i<=6;i++){
 		if (wit[i-1] == "1"){
-			degit[i] = loSym[st[i]].toString(2);
+			digit[i] = loSym[st[i]].toString(2);
 			} else {
-				degit[i] = leSym[st[i]].toString(2);
+				digit[i] = leSym[st[i]].toString(2);
 				}
 		}
 
 	//get right side bit data
 	for (i=7;i<=12;i++){
-		degit[i] = roSym[st[i]].toString(2);
+		digit[i] = roSym[st[i]].toString(2);
 		}
 
 	//create left guard bar
@@ -90,7 +87,7 @@ function creBar(){
 	//create left side bar	
 	for (j=1;j<=6;j++){
 		for (i=1;i<=7;i++){
-			if (degit[j][i]=="1"){
+			if (digit[j][i]=="1"){
 				currentLevel++;
 				}else if (currentLevel>0){
 					drawLine(xpos, 0, currentLevel);
@@ -116,7 +113,7 @@ function creBar(){
 	//create right side bar
 	for (j=7;j<=12;j++){
 		for (i=0;i<7;i++){
-			if (degit[j][i]=="1"){
+			if (digit[j][i]=="1"){
 				currentLevel++;
 				}else if (currentLevel>0){
 					drawLine(xpos, 0, currentLevel);
@@ -131,19 +128,19 @@ function creBar(){
 			currentLevel = 0;
 			}
 		}
-	
+
 	//create right guard bar
 	drawLine (xpos, 4.677, 1);
 	xpos += ptc;
 	drawLine (xpos, 4.677, 1);
-	
+
 	//add OCR string
 	var chStyle = myDoc.characterStyles.add("st1");
 	var chAttr = chStyle.characterAttributes;
 
 	xpos = 7;
 	ypos = 17.5;
-	var FontName = app.textFonts.getByName("OCRBStd");
+	var FontName = app.textFonts.getByName("OCRBStd"); //you can select other font.
 	chAttr.textFont = FontName;
 	chAttr.size = 8.6;
 	chAttr.autoLeading = false;
@@ -162,7 +159,6 @@ function creBar(){
 	var brObj = myLayer.pathItems.rectangle(80.936,4.705,105.703,75.317);
 	brObj.fillColor = app.activeDocument.swatches[0].color;
 	brObj.stroked = false;
-	dlg.close();
 	}
 
 
