@@ -1,37 +1,37 @@
-//   JAN code maker 2.0.2
-//	  This Script work with Adobe Illustrator CS3,. Generate EAN CODE on new AI document.
-//	  Creator : ten
-//	  Last update : 27.April.2009 (first release/Sep.04.2007)
-//        Release 2 : 19.Aug.2011.
+//   JAN code maker 2.0.1
+//	  This Script work with Adobe Illustrator CS3, to make JAN CODE or EAN CODE on new AI documents.	
+//	  Creater : ten
+//	  Last update : 27.April.2009 (first rerease/Sep.04.2007)
+//        Release 2 : 18.Aug. 2011.
+//        Last update : 18. Aug. 2011.
 
-//set to attribute parameters
+//set to attribute parameters (global)
 var xpos = 15;
-var ypos = 20;
-var ptc = 0.93537474;
-var yhgt = 64.8;
+var ptc = 0.93537474; //0.33MilliMeter = narrow bars line width
 var currentLevel = 0;
-var gain = 0;   //set value, if you want choke lines.
+var gain = 0;  //set value, if you want to choke lines width.
 var lnColor = new GrayColor;
 lnColor.gray = 100;
 
 var numString = "";
-var dlg = new Window ('dialog', 'JAN(EAN)コード入力', [100,100,480,400]);
-	dlg.msgPnl = dlg.add('panel', [25,70,355,150], 'コード入力');
-	dlg.msgPnl.msgEt = dlg.msgPnl.add('edittext', [15,30,315,50],'', {multiline:false});
-	dlg.btnPnl = dlg.add('panel', [120,180,355,225], ''); 
+var dlg = new Window ('dialog', 'EAN Code input', [100,100,480,270]);
+	dlg.msgPnl = dlg.add('panel', [25,20,355,80], 'EAN Code (13 digits)');
+	dlg.msgPnl.msgEt = dlg.msgPnl.add('edittext', [15,20,315,40],'', {multiline:false});
+	dlg.btnPnl = dlg.add('panel', [120,100,355,150], ''); 
 	dlg.btnPnl.submitBtn = dlg.btnPnl.add('button', [20,10,100,25], 'OK', {name:'ok'});
-	dlg.btnPnl.cancelBtn = dlg.btnPnl.add('button', [130,10,210,25], 'キャンセル', {name:'cancel'});
+	dlg.btnPnl.cancelBtn = dlg.btnPnl.add('button', [130,10,210,25], 'cancel', {name:'cancel'});
 	dlg.btnPnl.submitBtn.onClick = function (){creBar()};
 	dlg.show();
 
 function creBar(){
 	numString = dlg.msgPnl.msgEt.text
+	if (numString=="") return;
 	dlg.close();
 	var st = Array ();
 	var digit = Array ();
 	var bar = Array ();
 	var fChr = [0x3f,0x34,0x32,0x31,0x2c,0x26,0x23,0x2a,0x29,0x25];
-
+	
 	//1st character selection revese bit data. 7bit data in use, mask first bit.
 	//left even code.
 	var leSym = [0xa7,0xb3,0x9b,0xa1,0x9d,0xb9,0x85,0x91,0x89,0x97];
@@ -52,9 +52,9 @@ function creBar(){
 		} else {
 			mdMod = 10 - mdOd;
 			}
-
+	
 	if (mdMod != st[12]){
-		alert("Incorrect input data.");
+		alert("入力データに誤りがあります");
 		dlg.close();
 		return;
 		}
@@ -103,7 +103,7 @@ function creBar(){
 			}
 		}
 
-//create center bar
+	//create center bar
 	xpos += ptc;
 	drawLine (xpos, 4.677, 1);
 	xpos += ptc;
@@ -128,19 +128,16 @@ function creBar(){
 			currentLevel = 0;
 			}
 		}
-
+	
 	//create right guard bar
 	drawLine (xpos, 4.677, 1);
 	xpos += ptc;
 	drawLine (xpos, 4.677, 1);
-
+	
 	//add OCR string
 	var chStyle = myDoc.characterStyles.add("st1");
 	var chAttr = chStyle.characterAttributes;
-
-	xpos = 7;
-	ypos = 17.5;
-	var FontName = app.textFonts.getByName("OCRBStd"); //you can select other font.
+	var FontName = app.textFonts.getByName("OCRBStd");
 	chAttr.textFont = FontName;
 	chAttr.size = 8.6;
 	chAttr.autoLeading = false;
@@ -148,9 +145,8 @@ function creBar(){
 	chAttr.kerningMethod = AutoKernType.AUTO;	
 
 	var objTx = myLayer.textFrames.add ();
-	objTx.top = ypos;
-	objTx.left = xpos;
-	//objTx.size=8.6;
+	objTx.top = 17.5;
+	objTx.left = 7;
 	objTx.contents = String(st[0]+" "+st[1]+st[2]+st[3]+st[4]+st[5]+st[6]+" "
 							+st[7]+st[8]+st[9]+st[10]+st[11]+st[12]);
 	chStyle.applyTo (objTx.textRange);
