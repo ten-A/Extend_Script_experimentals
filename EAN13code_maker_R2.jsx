@@ -54,7 +54,7 @@ function creBar(){
 			}
 	
 	if (mdMod != st[12]){
-		alert("入力データに誤りがあります");
+		alert("Checksum error occurred...");
 		dlg.close();
 		return;
 		}
