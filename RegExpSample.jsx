@@ -63,7 +63,7 @@ var replacer = function (txRange, tg, str){ //txRange:textRange, tg:targetArray,
 			if (fl==0) continue;
 			if (fl==2) allReplace= true;
 			}
-		if (r2.value||ls3.selection.index!=0&&ckbx.value) {
+		if (r2.value||(ls3.selection.index!=0&&ckbx.value)) {
 			str = txRange.parent.textRange.characters[c[0]].contents, tmp = "";
 			for (j=c[0]+c[1]-1;j>c[0];j--) {
 				tmp = txRange.parent.textRange.characters[j].contents + tmp;
@@ -71,7 +71,8 @@ var replacer = function (txRange, tg, str){ //txRange:textRange, tg:targetArray,
 				}
 			str += tmp;
 			} else {
-				for (j=c[0]+c[1]-1;j>c[0];j--) txRange.parent.textRange.characters[j].remove();
+				for (j=c[0]+c[1]-1;j>c[0];j--) 
+					txRange.parent.textRange.characters[j].remove();
 				}
 		if(r1.value||r2.value) {
 			cstyle.applyTo(txRange.parent.textRange.characters[c[0]], true);
