@@ -1,4 +1,4 @@
-//Draw Apollonian Gasket...
+//Draw Apolonian Gasket...
 //more information in... http://en.wikipedia.org/wiki/Descartes%27_theorem
 
 
@@ -32,7 +32,7 @@ function pp(){
 		var okBtn = btnGroup.add("button", undefined, "OK");
 		var cancelBtn = btnGroup.add("button", undefined, "Cancel");
 		
-		doDraw = function(){
+		doDraw = function(sz){ //sz:minimum circle size
 			//if (!previewChk.value) return;
 			if (ud) {
 				app.undo();
@@ -47,18 +47,18 @@ function pp(){
 			ang["90"] = Math.PI/2;
 			ang["120"] = Math.PI/3*2;
 			ang["180"] = Math.PI;
-			main(tr, ang[dd.selection]);
+			main(tr, ang[dd.selection], sz);
 			ud = true;
 			redraw();
 			}
 		slider.onChanging = function(){
-			if(previewChk.value) doDraw ();
+			if(previewChk.value) doDraw (0.02);
 			}
 		dd.onChange = function(){
-			if(previewChk.value) doDraw ();
+			if(previewChk.value) doDraw (0.02);
 			}
 	    previewChk.onClick = function(){
-			if(previewChk.value) doDraw ();
+			if(previewChk.value) doDraw (0.02);
 			else if (!previewChk.value) {
 				app.undo();
 				ud = false;
@@ -66,7 +66,8 @@ function pp(){
 				}
             }
 		okBtn.onClick = function(){
-			if (!ud) doDraw ();
+			//if (ud) app.undo();
+			doDraw (0.001);
 			w.close();
 			}
 		cancelBtn.onClick = function(){
@@ -127,8 +128,7 @@ function tng(a, b, c, flg) { //a,b,c are circle objects
 
 
 
-function main(tr, angl) {//tr:number  angl:int
-	var minsize = 0.001;
+function main(tr, angl, sz) {//tr:number  angl:int sz:number/minsize
 	 var dc = app.activeDocument;
 	//draw primally circle
 	var b = new circle(0, 0, -1);
@@ -162,7 +162,7 @@ function main(tr, angl) {//tr:number  angl:int
 
 	for (var c=0;c<crcl.length;c++){
 		var nc = tng(crcl[c][0], crcl[c][1], crcl[c][2])[0];
-		if (nc.r>minsize){
+		if (nc.r>sz){
 			crcl.push([nc, crcl[c][1], crcl[c][2]]);
 			crcl.push([crcl[c][0], nc, crcl[c][2]]);
 			crcl.push([crcl[c][0], crcl[c][1], nc]);
@@ -173,7 +173,7 @@ function main(tr, angl) {//tr:number  angl:int
 
 
 function circle(x, y, rad) {
-	this.scl =100;
+	this.scl = 100;
 	this.x = x;
 	this.y = y;
 	this.r = rad;
@@ -182,10 +182,11 @@ function circle(x, y, rad) {
 	this.clr.magenta = 0;
 	this.clr.yellow = 0;
 	this.clr.black = 100;
-  this.draw = function() {
+	this.draw = function() {
+		if(isNaN(this.r)||isNaN(this.x)||isNaN(this.y)) return;
 		var cir = app.activeDocument.pathItems.ellipse (
-			(this.x + this.r) * this.scl - 200,
-			(this.y - this.r) * this.scl + 200,
+			(this.x + this.r) * this.scl - app.activeDocument.activeView.centerPoint[0],
+			(this.y - this.r) * this.scl - app.activeDocument.activeView.centerPoint[1],
 			this.r * 2 * this.scl,
 			this.r * 2 * this.scl);
 		cir.filled = false;
@@ -226,3 +227,4 @@ function Csqrt(c){ //square root
 		Math.sqrt(Math.sqrt(c.r*c.r+c.i*c.i))*Math.sin(Math.atan2(c.i,c.r)/2)
 		);
 	}
+
