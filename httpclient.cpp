@@ -66,7 +66,7 @@ extern "C" HTTPCLIENT long ESGetVersion()
 	return libraryVersionNumber;
 }
 
-extern "C" HTTPCLIENT char* ESInitialize (TaggedData* argv, long argc) Extendscript側から利用するイニシャライザ
+extern "C" HTTPCLIENT char* ESInitialize (TaggedData* argv, long argc) //Extendscript側から利用するイニシャライザ
 {
 	unused(&argv);
 	unused(&argc);
@@ -89,7 +89,8 @@ extern "C" HTTPCLIENT long setVersion (TaggedData* argv, long argc, TaggedData* 
 
 /*
 引数はURL（"http://www.chuwa.iobb.net/test.php?data=10024"）の様な形で与えられる。
-TaggedData構造体はint・ling・string・array等の各種型が含まれるため、どういった形の引数でも受け取ることが出来る。longで受けるargcは引数の数。retvalは返り値でTaggedData構造体を指定している為返す形式は後で決める。
+TaggedData構造体はint・long・string・array等の各種型が含まれるため、どういった形の引数でも受け取ることが出来る。
+longで受けるargcは引数の数。retvalは返り値でTaggedData構造体を指定している為返す形式は後で決める。
 */
 extern "C" HTTPCLIENT long getHTTP (TaggedData* argv, long argc, TaggedData* retval) //HTTPクライアント用
 {
