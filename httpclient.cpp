@@ -146,7 +146,7 @@ extern "C" HTTPCLIENT long getHTTP (TaggedData* argv, long argc, TaggedData* ret
         read_size = read(s, buf, BUF_LEN); //ソケットから読み込みバッファに受信データを取り込む
         if (read_size > 0) //取り出したデータがある場合
         {
-            sprintf(tmp,"%s%s", tmp, buf);//テンポラリに読み込みバッファの内容を結合
+            sprintf(tmp,"%s", buf);//テンポラリに読み込みバッファの内容を結合
         }
         else
         {
