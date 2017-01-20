@@ -1,3 +1,4 @@
+//Download HttpClient.Framework and adjust your libPath befor run it.
 try {
 	var libPath = "/HttpClient.framework";
 	if (eo==null) var eo = new ExternalObject("lib:" + libPath);
