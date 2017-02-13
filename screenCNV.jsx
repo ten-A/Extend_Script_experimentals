@@ -3,12 +3,7 @@ var tg = app.selection[0];
 var bd = tg.geometricBounds;
 var wdh = bd[2] - bd[0];
 var hgt = Math.abs(bd[3] - bd[1]);
-makeMz(
-			Math.floor(wdh / n),
-			Math.floor(hgt / n),
-			wdh / wdh / n,
-			Math.floor(wdh / Math.floor(wdh / n))
-			);
+makeMz(Math.floor(wdh / n), Math.floor(hgt / n), wdh / wdh / n, Math.floor(wdh / Math.floor(wdh / n)));
 
 tg = app.selection[0].pathItems;
 var bk = new GrayColor;
