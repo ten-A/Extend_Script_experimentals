@@ -7,7 +7,7 @@ XMPtool = {
 		var xmpFile = new XMPFile(this.f.fsName, XMPConst.UNKNOWN, XMPConst.OPEN_FOR_READ);
 		var xmpPackets = xmpFile.getXMP();
 		var xmp = new XMPMeta(xmpPackets.serialize());
-		alert(xmp.getProperty(this.ns, prop).toString());
+		xmp.getProperty(this.ns, prop).toString();
 		},
 	write : function(prop, val){ //argumetns{prop:String/property of custom metadata, val1:String/value} 
   		if(xmpLib==undefined) var xmpLib = new ExternalObject('lib:AdobeXMPScript');
@@ -23,5 +23,5 @@ XMPtool = {
 
 XMPtool.f = File.openDialog ();
 XMPtool.write("memo1", "てすとの文字列ですね？");
-XMPtool.read("memo1");
+alert(XMPtool.read("memo1"));
 		
