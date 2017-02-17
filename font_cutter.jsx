@@ -163,5 +163,3 @@ function saveTables(nam, offset, len) {
 		}
 	fn.close();
 	}
-
-u2sj_init();
