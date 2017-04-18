@@ -14,7 +14,7 @@ function task1(ev){
 	ctn = app.toolBoxTools.currentToolName;
 	idleTask = app.idleTasks.add({name:'toolObserver', sleep:80})
 					.addEventListener(IdleEvent.ON_IDLE, task1)
-	$.writeln(app.toolBoxTools.currentToolName);
+	//$.writeln(app.toolBoxTools.currentToolName);
 	}
 
 function toolChanged(){
