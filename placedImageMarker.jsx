@@ -1,5 +1,5 @@
 /*
-	Placed Image Marker
+	Placed Image Marker for Illustrastor
 	make new layer and add placed image name. If find too low actual resolution, It marks Red name and Bounds.
 */
 
