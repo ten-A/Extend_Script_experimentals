@@ -25,7 +25,7 @@ alert(getHTTP("http://chuwa.iobb.net"));
 #endif
 
 #define BUF_LEN 256
-#define MAX_MSGSIZE 2048
+#define MAX_MSGSIZE 65535
 #define MSGSIZE 32
 
 
@@ -140,7 +140,7 @@ extern "C" HTTPCLIENT long getHTTP (TaggedData* argv, long argc, TaggedData* ret
     char tmp[MAX_MSGSIZE]; //受信用テンポラリ
     int ctr;
     ctr = 0;
-    while (ctr<MAX_MSGSIZE)//とりあえず最大取得可能文字数を制限してある。必要ならwhileの引数とtmpのサイズを調整する
+    while (ctr<MAX_MSGSIZE)
     {
         char buf[BUF_LEN];//読み込みバッファの定義
         read_size = read(s, buf, BUF_LEN); //ソケットから読み込みバッファに受信データを取り込む
