@@ -2,7 +2,7 @@ var taxCalc = {
 	tax : 10,
 	base : 8,
 	inTax : false,
-	re : /(\d{1,3},)(\d{3},){0,3}(\d{1,3}|\d{1,2})/,
+	re : /(\d{1,3},)?(\d{3},){0,3}(\d{1,3}|\d{1,2})/,
 	exe : function (tg){
 		if(tg.contents.match(this.re)!=null){
 			var str = tg.contents.match(this.re)[0];
