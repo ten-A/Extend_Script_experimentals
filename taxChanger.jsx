@@ -1,6 +1,6 @@
 var taxCalc = {
-	tax : 8,
-	base : 5,
+	tax : 10,
+	base : 8,
 	inTax : false,
 	re : /(\d{1,3},)(\d{3},){0,3}(\d{1,3}|\d{1,2})/,
 	exe : function (tg){
