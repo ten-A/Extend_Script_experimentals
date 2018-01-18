@@ -1,8 +1,8 @@
 var header = "%!PS-Adobe-3.0 "+"\n"+
 	"%%Creator: Adobe Illustrator(R) 13.0"+"\n"+
 	"%%AI8_CreatorVersion: 13.0.3"+"\n"+
-	"%%For: (Ten_chan) ()"+"\n"+
-	"%%Title: (テストドキュメント.ai)"+"\n"+
+	"%%For: (Ten_a) ()"+"\n"+
+	"%%Title: (test.ai)"+"\n"+
 	"%%CreationDate: 8/12/09 9:55 AM"+"\n"+
 	"%%BoundingBox: 251 351 612 572"+"\n"+
 	"%%HiResBoundingBox: 251.5371 351.708 611.0557 571.2261"+"\n"+
@@ -55,13 +55,13 @@ var filerf = new File ("~/Desktop/test.ai");
 var flag = filerf.open ("w","","");
 
 filerf.write(header);
-filerf.writeln("100 100 m\n");
+filerf.writeln("100 100 m");
 
-filerf.writeln(x1 + " 100 L\n");
-filerf.writeln(x1 + "  " + y1 + " L\n");
-filerf.writeln(x1 + "  " + y1 + " L\n");
-filerf.writeln("100 " + y1 + " L\n");
-filerf.writeln("100 100 L\n");
-filerf.writeln(footer);
+filerf.writeln(x1 + " 100 L");
+filerf.writeln(x1 + "  " + y1 + " L");
+filerf.writeln(x1 + "  " + y1 + " L");
+filerf.writeln("100 " + y1 + " L");
+filerf.writeln("100 100 L");
+filerf.write(footer);
 filerf.close;
 
