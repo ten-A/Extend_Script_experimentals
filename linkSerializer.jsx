@@ -3,7 +3,7 @@
 	This script collects all graphics item to the selected holder and geven serialized names. Linked graphics also swapped serialized files .
 	All works will logged. Sreialized graphics files also have original name in XMP metadata field.
 	License : MTI License.
-	Creator : Ten A (An Adobe Community Proffessional) 
+	Creator : Ten A (An Adobe Community professional) 
 */
 
 
