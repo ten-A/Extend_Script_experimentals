@@ -56,7 +56,6 @@ linkSerializer = {
 				this.write("memo1", fullPath);
 				tmp = tg[i].parent;
 				tmp.place(File(newPath));
-				tmp.graphics[0].itemLink.update();
 				}
 			logFile.close();
 			}
