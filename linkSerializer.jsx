@@ -64,6 +64,6 @@ linkSerializer = {
 
 
 //~ linkSerializer.dstFolder = "~/Desktop/collect_folder";
-//~ linkSerializer.prefix = "testDocument";
+//~ linkSerializer.fn_prefix = "testDocument";
 //~ linkSerializer.log = "~/Desktop/testResult.log";
 linkSerializer.collect(app.activeDocument)
