@@ -1,7 +1,7 @@
 #targetengine session
 
 var ps;
-if (app.selection[0] instanceof Character //if selection in not correct, It will terminate.
+if (app.selection[0] instanceof Character //if selection isn't correct, It will terminate.
 		||app.selection[0] instanceof Word) {
 	if (app.selection[0].toString().indexOf(InsertionPoint)>-1) {
 		ps = app.selection[0].index;
