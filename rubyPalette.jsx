@@ -19,7 +19,7 @@
 		w.submitBtn = w.add('button', undefined, '適　用', {name:'ok'});
 		w.closelBtn = w.add('button', undefined, 'とじる', {name:'close'});
 		w.closelBtn.onClick = function(){
-			app.idleTasks.everyItem().remove();
+			app.idleTasks.itemByName("rubyPalette").remove();
 			w.close();
 			}
 		w.submitBtn.onClick = function(){ //Apply ruby string.
