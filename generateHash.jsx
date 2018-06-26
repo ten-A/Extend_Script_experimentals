@@ -134,4 +134,4 @@ var ghs="@JSXBIN@ES@2.0@MyBbyBn0ABJMnAENyBnAMAbyBn0ADJBnASzDjTjUjSBAXzIjVjTjFjSi
 +"AhAU40BhAC0AYCLzEjIjBjTjIiUNyBnAMLbyBn0ABZLnAEXiHfeSfRBVBfAffABB40BhAB0AYCLnfZL"
 +"nAEXiUfjEfRBVBfAffABB40BiAABAYCMnf0DYByB";
 eval(ghs);
-alert(dgst.hash(app.userAdobeId));
+alert(dgst.hash(app.userAdobeId)); //arg:String
