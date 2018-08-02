@@ -5,8 +5,7 @@ var ch =[];
 if (tg.fillColor instanceof RGBColor){
 	ch =["red","green","blue"];
 	for (var i=0;i<3;i++){
-		if (eval("tg.fillColor"+ch[i])==0) str += "00";
-		else str += ch[i] + ":" + eval("tg.fillColor."+ch[i]) + "\n";
+		str += ch[i] + ":" + eval("tg.fillColor."+ch[i]) + "\n";
 		}
 	}
 else {
