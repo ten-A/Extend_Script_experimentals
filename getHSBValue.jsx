@@ -29,5 +29,5 @@ function rgbToHsv(r, g, b) {
 
     h *= 60;
   }
-  return [ Math.round(h), Math.round(s), Math.round(v) ];
+  return [ Math.round(h), Math.round(s*100)/100, Math.round(v*100)/100 ];
 }
