@@ -7,7 +7,7 @@ XMPtool = {
 		var xmpFile = new XMPFile(this.f.fsName, XMPConst.UNKNOWN, XMPConst.OPEN_FOR_READ);
 		var xmpPackets = xmpFile.getXMP();
 		var xmp = new XMPMeta(xmpPackets.serialize());
-		xmp.getProperty(this.ns, prop).toString();
+		return xmp.getProperty(this.ns, prop).toString();
 		},
 	write : function(prop, val){ //argumetns{prop:String/property of custom metadata, val1:String/value} 
   		if(xmpLib==undefined) var xmpLib = new ExternalObject('lib:AdobeXMPScript');
@@ -21,7 +21,10 @@ XMPtool = {
 		}
 	}
 
-XMPtool.f = File.openDialog ();
-XMPtool.write("memo1", "てすとの文字列ですね？");
-alert(XMPtool.read("memo1"));
-		
+
+/*
+XMPtool.ns = "http://purl.org/dc/elements/1.1/";  
+XMPtool.prefix = "dc";  
+XMPtool.f = File.openDialog (); //select target file.  
+$.writeln(XMPtool.read("title[1]"));  
+*/		
