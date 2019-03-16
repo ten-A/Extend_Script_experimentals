@@ -1,0 +1,2 @@
+#targetengine session
+app.idleTasks.itemByName("mcl").isValid?app.idleTasks.itemByName("mcl").remove():itsk=app.idleTasks.add({name:"mcl",sleep:200}).addEventListener(IdleEvent.ON_IDLE,mcfc);function mcfc(){app.idleTasks.itemByName("mcl").remove();var a=app.selection;if(0!=a.length&&"Cell"==a[0].reflect.name&&1<a[0].cells.length)for(;1<app.selection[0].cells.length;)app.selection[0].cells[0].merge(app.selection[0].cells[1]);itsk=app.idleTasks.add({name:"mcl",sleep:200}).addEventListener(IdleEvent.ON_IDLE,mcfc)};
