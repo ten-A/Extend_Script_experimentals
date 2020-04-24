@@ -28,7 +28,18 @@ function getPSName(f){
 			if (nr[3]==6) break; //ID = 6 as postscript name.
 			}
 		f.seek(nr[5]); //jump to strings and read it.
-		for (k=0;k<nr[4];k++) result += f.readch();
+		result += f.readch();
+		if (result.charCodeAt(0)==0) { //16 bit characters/discard first byte
+			result = f.readch();
+			for (k=1;k<nr[4]/2;k++) {
+				f.readch();
+				result += f.readch();
+				$.writeln (result.charCodeAt(k))
+				}
+			}
+		else { //8bit Ascii
+			for (k=0;k<nr[4];k++) result += f.readch();
+			}
 		return result;
 		}
 	catch(e){
