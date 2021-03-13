@@ -1,4 +1,5 @@
 jpgtool = {
+	opt : "Baseline",
 	precision : 0,
 	components : 0,
 	width : 0,
@@ -12,7 +13,11 @@ jpgtool = {
 				var d = jpgtool.readByte(f);
 				if (d==0xff){
 					d = jpgtool.readByte(f);
-					if (d==0xc0){
+					if (d==0xc2){
+						this.opt = "Progressive";
+						bds = jpgtool.getValue(f);
+						}
+					else if (d==0xc0){
 						bds = jpgtool.getValue(f);
 						}
 					}
@@ -42,8 +47,9 @@ jpgtool = {
 
 
 var val = jpgtool.getInfo(File.openDialog ("select JPG File."));
-var tx = "width = " + val.width + " px\n";
- tx += "height = " + val.height + " px\n";
- tx += "precision = " + val.precision + " bit\n";
- tx += "components = " + val.components + " (channel)";
+var tx = val.opt + "\n"
+	+ "width = " + val.width + " px\n"
+	+ "height = " + val.height + " px\n"
+	+ "precision = " + val.precision + " bit\n"
+	+ "components = " + val.components + " (channel)";
 alert (tx);
