@@ -1,0 +1,1 @@
+app.preferences.setBooleanPreference("aiFileFormat/enableContentRecovery",1);
